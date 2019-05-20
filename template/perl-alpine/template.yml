@@ -1,0 +1,2 @@
+language: perl-alpine
+fprocess: perl main.pl
