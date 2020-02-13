@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.11
 
 RUN apk --no-cache add curl \
     && echo "Pulling watchdog binary from Github." \
@@ -10,7 +10,7 @@ WORKDIR /home/app
 COPY main.pl .
 COPY function function
 
-RUN apk --no-cache add perl build-base perl-app-cpanminus wget perl-dev openssl openssl-dev \
+RUN apk --no-cache add perl build-base perl-app-cpanminus wget perl-dev openssl openssl-dev perl-net-ssleay \
     && cpanm --installdeps ./function \
     && apk --no-cache del build-base perl-app-cpanminus wget perl-dev openssl-dev \
     && rm -rf /root/.cpanm
