@@ -1,10 +1,9 @@
-FROM alpine:3.11
+FROM ghcr.io/openfaas/classic-watchdog:0.1.4 as watchdog
+FROM alpine:3.12.3
 
-RUN apk --no-cache add curl \
-    && echo "Pulling watchdog binary from Github." \
-    && curl -sSL https://github.com/openfaas/faas/releases/download/0.13.0/fwatchdog > /usr/bin/fwatchdog \
-    && chmod +x /usr/bin/fwatchdog \
-    && apk --no-cache del curl
+# deploy watchdog
+COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
+RUN chmod +x /usr/bin/fwatchdog
 
 WORKDIR /home/app
 COPY main.pl .
