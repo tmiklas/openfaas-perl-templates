@@ -1,5 +1,5 @@
 FROM ghcr.io/openfaas/classic-watchdog:0.1.4 as watchdog
-FROM alpine:3.12.3
+FROM alpine:3.13.0
 
 # deploy watchdog
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
